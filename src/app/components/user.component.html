@@ -1,0 +1,36 @@
+<h1>Hello {{name}}</h1>
+  <p>Email: {{email}}</p>
+  <p>Address: {{address.street}} {{address.city}} {{address.state}}</p>
+  <button (click)="toggleHob()">{{showHob ? 'Hide' : 'Show'}}</button>
+  <div *ngIf="showHob"> 
+      <h3>Hobbies:</h3>
+      <ul>
+        <li *ngFor = "let hobby of hobbies; let i = index">
+          {{hobby}} <button (click)="deleteHobby(i)">x</button>
+        </li>
+      </ul>
+      <form (submit)="addHobby(hobby.value)">
+        <label>Add hobby:</label><br/>
+        <input type="text" #hobby><br/>  
+      </form>
+  </div>
+  <hr/>
+  <h3>Edit user</h3>
+  <form>
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" [(ngModel)]="name">
+    <label for="email">Email:</label>
+    <input type="text" name="email" id="email" [(ngModel)]="email">
+    <label for="address.street">Street:</label>
+    <input type="text" name="address.street" id="address.street" [(ngModel)]="address.street">
+    <label for="address.city">City:</label>
+    <input type="text" name="address.city" id="address.city" [(ngModel)]="address.city">
+    <label for="address.state">State:</label>
+    <input type="text" name="address.state" id="address.state" [(ngModel)]="address.state">    
+  </form>
+  <hr/>
+  <h3>Persons</h3>
+  <div *ngFor = "let person of pers">
+    <p>{{person.ename}}, {{person.deptno}}, {{person.empno}}</p>
+  </div>
+  <button (click)="nextPers()">Next</button>
