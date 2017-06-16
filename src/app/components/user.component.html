@@ -30,7 +30,8 @@
   </form>
   <hr/>
   <h3>Persons</h3>
-  <div *ngFor = "let person of pers">
+  <div *ngFor = "let person of persItems">
     <p>{{person.ename}}, {{person.deptno}}, {{person.empno}}</p>
   </div>
   <button (click)="nextPers()">Next</button>
+  <button (click)="createPers()">Create</button>

@@ -8,14 +8,15 @@ import { AnaService } from '../services/ana.service';
   templateUrl: './user.component.html',
   providers: [AnaService]
 })
-export class UserComponent  { 
+export class UserComponent { 
   name : string;
   email: string;
   address: address;
   hobbies: string[];
   showHob: boolean;
   persons: Person.RootObject;
-  pers: Person.Item[];
+  persItems: Person.Item[];
+  persPost: PersPost;
 
   constructor (private anaService: AnaService) {
     this.name = 'Prova test';
@@ -30,7 +31,7 @@ export class UserComponent  {
 
     this.anaService.getAna().subscribe(ana => {
       this.persons = ana;
-      this.pers = ana.items;     
+      this.persItems = ana.items;     
     }); 
     
   }
@@ -53,9 +54,23 @@ export class UserComponent  {
 
   nextPers(){
     this.anaService.getAna(this.persons.next.$ref).subscribe(ana => {
-      this.pers = ana.items;
+      this.persItems = ana.items;
       this.persons.next = ana.next;
     });
+  }
+
+  createPers() {    
+      this.persPost = {
+          empno : 997,
+          ename : "TEST",
+          job : "PROVA",
+          mgr : 7839,
+          hiredate : "1981-06-08T22:00:00Z",
+          sal : 2222,
+          deptno : 11
+      };
+      
+      this.anaService.create().subscribe(res  => console.log(res));
   }
   
 }
@@ -65,6 +80,17 @@ interface address {
     city: string;
     state: string; 
 }
+
+
+interface PersPost {
+        empno: number;
+        ename: string;
+        job: string;
+        mgr: number;
+        hiredate: string;        
+        sal: number;
+        deptno: number;
+} 
 
 
 declare module Person {
@@ -106,30 +132,3 @@ declare module Person {
     }
 
 }
-
-
-
-
-
-
-
-/*interface Person {
-  first: {
-    $ref: string;
-  };
-  next: {
-    $ref: string;
-  };
-  previos: {
-    $ref: string;
-  };
-  items: {
-  deptno: number;
-  empno: number;
-  ename: string;
-  }[];
-}
-
-interface Next {
-  $ref: string;
-}*/
