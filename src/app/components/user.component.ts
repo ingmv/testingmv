@@ -30,7 +30,7 @@ export class UserComponent {
     this.hobbies = ['music', 'sport'];
     this.showHob = false; 
 
-    this.persPost = {uri: null, rn: null,"empno":998,"ename":"test2","job":"MANAGER","mgr":7839,"hiredate": new Date("1999-01-01"),"sal":2450,"deptno":10};
+    this.persPost = {uri: null, rn: null,empno: null, ename: null, job: null, mgr: null, hiredate: new Date('1999-01-01'), sal: null,deptno: null};
 
     this.anaService.getAna().subscribe(ana => {
       this.persons = ana;
