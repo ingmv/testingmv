@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AnaService } from '../services/ana.service';
+import { Person } from "../person.d";
 
 
 @Component({
@@ -16,7 +17,7 @@ export class UserComponent {
   showHob: boolean;
   persons: Person.RootObject;
   persItems: Person.Item[];
-  persPost: PersPost;
+  persPost: Person.Item;
 
   constructor (private anaService: AnaService) {
     this.name = 'Prova test';
@@ -29,10 +30,12 @@ export class UserComponent {
     this.hobbies = ['music', 'sport'];
     this.showHob = false; 
 
+    this.persPost = {uri: null, rn: null,"empno":998,"ename":"test2","job":"MANAGER","mgr":7839,"hiredate": new Date("1999-01-01"),"sal":2450,"deptno":10};
+
     this.anaService.getAna().subscribe(ana => {
       this.persons = ana;
       this.persItems = ana.items;     
-    }); 
+      }); 
     
   }
 
@@ -59,18 +62,11 @@ export class UserComponent {
     });
   }
 
-  createPers() {    
-      this.persPost = {
-          empno : 999,
-          ename : "TEST",
-          job : "PROVA",
-          mgr : 7839,
-          hiredate : "1981-06-08T22:00:00Z",
-          sal : 2222,
-          deptno : 11
-      };
-      
-      this.anaService.create(this.persPost).subscribe(res  => console.log(res));
+  createPers() {           
+      this.anaService.create(this.persPost).subscribe(res  => {
+          console.log(res);
+          this.anaService.getAna().subscribe(ana => this.persItems = ana.items);
+           });      
   }
   
 }
@@ -79,56 +75,4 @@ interface address {
     street: string;
     city: string;
     state: string; 
-}
-
-
-interface PersPost {
-        empno: number;
-        ename: string;
-        job: string;
-        mgr: number;
-        hiredate: string;        
-        sal: number;
-        deptno: number;
-} 
-
-
-declare module Person {
-
-    export interface First {
-        $ref: string;
-    }
-
-    export interface Previous {
-        $ref: string;
-    }
-
-    export interface Next {
-        $ref: string;
-    }
-
-    export interface Uri {
-        $ref: string;
-    }
-
-    export interface Item {
-        uri: Uri;
-        rn: number;
-        empno: number;
-        ename: string;
-        job: string;
-        hiredate: Date;
-        mgr: number;
-        sal: number;
-        deptno: number;
-        comm?: number;
-    }
-
-    export interface RootObject {
-        first: First;
-        previous: Previous;
-        next: Next;
-        items: Item[];
-    }
-
 }

@@ -3,6 +3,8 @@ import{Http} from '@angular/http';
 import {Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 
+import { Person } from "../person.d";
+
 @Injectable()
 export class AnaService{
 
@@ -17,29 +19,14 @@ export class AnaService{
         return this.http.get(uriStr).map(res => res.json(),);        
     }
 
-    create(pers: PersPost) {
-    //create(){        
+    create(pers: Person.Item) {
         let headers = new Headers({ 'content-type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         let body = JSON.stringify(pers);
-        console.log(this.uriAna+pers.empno);
-        console.log({body});
-        console.log(pers);
-        //let str = "empno:991, ename:'test', job:'MANAGER', mgr:7839, hiredate:'1981-06-08T22:00:00Z', sal:2450, deptno:10";
-        return this.http.post(this.uriAna+pers.empno, body, options)
-                            .map(res => res.json());
-    }
- 
+        console.log('string json');
+        console.log(body);
+        console.log('oggetto pers');
+        console.log(pers);        
+        return this.http.post(this.uriAna, body, options).map(res => res.json());
+    } 
 }
-
-
-interface PersPost {
-        empno: number;
-        ename: string;
-        job: string;
-        mgr: number;
-        hiredate: string;        
-        sal: number;
-        deptno: number;
-}  
-

@@ -34,4 +34,22 @@
     <p>{{person.ename}}, {{person.deptno}}, {{person.empno}}</p>
   </div>
   <button (click)="nextPers()">Next</button>
+  <hr/>
+  <form>
+    <label for="persPost.empno">empno:</label>
+    <input type="text" name="persPost.empno" id="persPost.empno" [(ngModel)]="persPost.empno"><br/>
+    <label for="persPost.ename">ename:</label>
+    <input type="text" name="persPost.ename" id="persPost.ename" [(ngModel)]="persPost.ename"><br/>
+    <label for="persPost.job">job:</label>
+    <input type="text" name="persPost.job" id="persPost.job" [(ngModel)]="persPost.job"><br/>
+    <label for="persPost.mgr">mgr:</label>
+    <input type="text" name="persPost.mgr" id="persPost.mgr" [(ngModel)]="persPost.mgr"><br/>
+    <label for="persPost.hiredate">hiredate:</label>
+    <input type="text" name="persPost.hiredate" id="persPost.hiredate" [(ngModel)]="persPost.hiredate"><br/>    
+    <label for="persPost.sal">sal:</label>
+    <input type="text" name="persPost.sal" id="persPost.sal" [(ngModel)]="persPost.sal"><br/>  
+    <label for="persPost.deptno">deptno:</label>
+    <input type="text" name="persPost.deptno" id="persPost.deptno" [(ngModel)]="persPost.deptno"><br/>
+  </form>
+  <br/>
   <button (click)="createPers()">Create</button>
