@@ -17,17 +17,17 @@ export class AnaService{
         return this.http.get(uriStr).map(res => res.json(),);        
     }
 
-    //create(pers: PersPost) {
-    create(){        
+    create(pers: PersPost) {
+    //create(){        
         let headers = new Headers({ 'content-type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        //let body = JSON.stringify(pers);
-        /*console.log(this.uriAna+pers.empno);
-        console.log(JSON.stringify(pers));
-        console.log(pers);*/
-        let str = "empno:991, ename:'test', job:'MANAGER', mgr:7839, hiredate:'1981-06-08T22:00:00Z', sal:2450, deptno:10";
-        return this.http.post(this.uriAna+'991', {str}, options)
-                            .map(res => res.json(),);
+        let body = JSON.stringify(pers);
+        console.log(this.uriAna+pers.empno);
+        console.log({body});
+        console.log(pers);
+        //let str = "empno:991, ename:'test', job:'MANAGER', mgr:7839, hiredate:'1981-06-08T22:00:00Z', sal:2450, deptno:10";
+        return this.http.post(this.uriAna+pers.empno, body, options)
+                            .map(res => res.json());
     }
  
 }

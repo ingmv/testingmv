@@ -61,7 +61,7 @@ export class UserComponent {
 
   createPers() {    
       this.persPost = {
-          empno : 997,
+          empno : 999,
           ename : "TEST",
           job : "PROVA",
           mgr : 7839,
@@ -70,7 +70,7 @@ export class UserComponent {
           deptno : 11
       };
       
-      this.anaService.create().subscribe(res  => console.log(res));
+      this.anaService.create(this.persPost).subscribe(res  => console.log(res));
   }
   
 }
